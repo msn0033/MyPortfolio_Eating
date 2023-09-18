@@ -18,6 +18,14 @@ namespace Infrastructure.Config
         {
             builder.HasKey(x => x.Id);
           //  builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
+          builder.Property(x=>x.Street)
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(50)
+                .IsRequired();
+          builder.Property(x => x.City)
+                .HasColumnType("NVARCHAR")
+                .HasMaxLength(50)
+                .IsRequired();
 
             builder.ToTable("Addresss");
 

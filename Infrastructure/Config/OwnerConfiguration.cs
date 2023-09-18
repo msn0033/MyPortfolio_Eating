@@ -18,7 +18,26 @@ namespace Infrastructure.Config
         public void Configure(EntityTypeBuilder<Owner> builder)
         {
             builder.HasKey(x => x.Id);
-          //  builder.Property(x => x.Id).HasDefaultValueSql("(newid())");
+            //  builder.Property(x => x.Id).HasDefaultValueSql("(newid())");
+
+            builder.Property(x => x.FName)
+               .HasColumnType("NVARCHAR")
+               .HasMaxLength(50)
+               .IsRequired();
+            builder.Property(x => x.LName)
+               .HasColumnType("NVARCHAR")
+               .HasMaxLength(50)
+               .IsRequired();
+            builder.Property(x => x.Avatar)
+               .HasColumnType("NVARCHAR")
+               .HasMaxLength(50)
+               .IsRequired();
+            builder.Property(x => x.Profil)
+               .HasColumnType("NVARCHAR")
+               .HasMaxLength(50)
+               .IsRequired();
+
+
             builder.ToTable("Owners");
 
             // Owner ----- PortFolioItem

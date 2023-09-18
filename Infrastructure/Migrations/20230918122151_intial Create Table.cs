@@ -16,10 +16,10 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    FName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    LName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Avatar = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Profil = table.Column<string>(type: "nvarchar(max)", nullable: true)
+                    FName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    LName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    Avatar = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    Profil = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false)
                 },
                 constraints: table =>
                 {
@@ -31,8 +31,8 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    n1 = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    n2 = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    n1 = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    n2 = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: true),
                     n3 = table.Column<string>(type: "nvarchar(max)", nullable: true)
                 },
                 constraints: table =>
@@ -45,9 +45,9 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    ProjectName = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    ImageUrl = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    Description = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    ProjectName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    ImageUrl = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    Description = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: true),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
                 constraints: table =>
@@ -91,8 +91,8 @@ namespace Infrastructure.Migrations
                 columns: table => new
                 {
                     Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
-                    Street = table.Column<string>(type: "nvarchar(max)", nullable: true),
-                    City = table.Column<string>(type: "nvarchar(max)", nullable: true),
+                    Street = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
+                    City = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     MainAddress = table.Column<bool>(type: "bit", nullable: false),
                     ContactId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
