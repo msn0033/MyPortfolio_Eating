@@ -1,10 +1,17 @@
 
 
+using Infrastructure.Data;
+using Microsoft.EntityFrameworkCore;
+using System;
+
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();
-
+builder.Services.AddDbContext<Context>(options =>
+{
+    options.UseSqlServer(builder.Configuration.GetConnectionString("constr"));
+});
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
@@ -26,5 +33,6 @@ app.MapControllerRoute(
     pattern: "{controller=Home}/{action=Index}/{id?}");
 
 //app.MapGet("/", () => "Hello World!");
+
 
 app.Run();

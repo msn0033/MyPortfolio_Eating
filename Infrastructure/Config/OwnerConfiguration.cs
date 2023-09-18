@@ -1,10 +1,12 @@
 ﻿using Core.Entites;
+using Infrastructure.Seeding;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 using Microsoft.EntityFrameworkCore.ValueGeneration;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -16,15 +18,18 @@ namespace Infrastructure.Config
         public void Configure(EntityTypeBuilder<Owner> builder)
         {
             builder.HasKey(x => x.Id);
-            builder.Property(x => x.Id).HasValueGenerator<SequentialGuidValueGenerator>();
+          //  builder.Property(x => x.Id).HasDefaultValueSql("(newid())");
             builder.ToTable("Owners");
 
+            // Owner ----- PortFolioItem
+            builder.HasMany(x => x.PortFolioItem)
+                   .WithOne(x => x.Owner)
+                   .HasForeignKey(x => x.OwnerId)
+                   .IsRequired(true);
 
-            //RelationShip
-            builder.HasMany(x => x.Address)
-                .WithOne(x => x.Owner)
-                .HasForeignKey(x => x.OwnerId)
-                .IsRequired(false);
+         // builder.HasData(Seed.LoadOwner());
+        //  builder.HasData(Seed.LoadAddress());
+
         }
     }
 }

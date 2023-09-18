@@ -7,9 +7,11 @@ namespace Core
 
         public string? Street { get; set; }
         public string? City { get; set; }
-        public string? PhoneNumber { get; set; }
-        public Guid OwnerId { get; set; }
-        public Owner? Owner { get; set; }
+        public bool MainAddress { get; set; }
+        public Guid? ContactId { get; set; }
+        public Contact? Contact { get; set; }
+
+
 
     }
 }
