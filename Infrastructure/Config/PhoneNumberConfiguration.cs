@@ -17,7 +17,7 @@ namespace Infrastructure.Config
         public void Configure(EntityTypeBuilder<PhoneNumber> builder)
         {
             builder.HasKey(x => x.Id);
-            // builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
+            builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
 
             builder.Property(x => x.n1)
                .HasColumnType("NVARCHAR")

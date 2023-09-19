@@ -16,7 +16,7 @@ namespace Infrastructure.Config
         public void Configure(EntityTypeBuilder<Contact> builder)
         {
             builder.HasKey(x => x.Id);
-         //   builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
+            builder.Property(x => x.Id).HasDefaultValueSql("NEWID()");
             builder.ToTable("Contacts");
 
             //RelationShip

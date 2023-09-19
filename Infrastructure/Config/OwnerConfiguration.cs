@@ -18,7 +18,7 @@ namespace Infrastructure.Config
         public void Configure(EntityTypeBuilder<Owner> builder)
         {
             builder.HasKey(x => x.Id);
-            //  builder.Property(x => x.Id).HasDefaultValueSql("(newid())");
+            builder.Property(x => x.Id).HasDefaultValueSql("newid()");
 
             builder.Property(x => x.FName)
                .HasColumnType("NVARCHAR")

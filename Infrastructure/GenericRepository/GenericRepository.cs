@@ -19,20 +19,17 @@ namespace Infrastructure.GenericRepository
             this._context = context;
             _table=_context.Set<T>();
         }
-        public async Task Delete(object id)
-        {
-          T ex=await  GetById(id);
-            _table.Remove(ex);
-        }
+     
 
         public IQueryable<T> GetAll()
         {
             return _table.AsQueryable();
         }
 
-        public async Task<T> GetById(object id)
+        public async Task<T> GetByIdAsync(object id)
         {
-            return await _table!.FindAsync(id);
+            var x= await _table!.FindAsync(id);
+            return x!;
         }
 
         public async Task Insert(T entity)
@@ -40,9 +37,16 @@ namespace Infrastructure.GenericRepository
             await _table.AddAsync(entity);
         }
 
-        public void Update(T entity)
+        public async Task Update(T entity ,object id)
         {
-           _table.Update(entity);
+            T ex=await GetByIdAsync(id);
+            ex = entity;
+           _table.Update(ex);
+        }
+        public async Task Delete(object id)
+        {
+            T ex = await GetByIdAsync(id);
+            _table.Remove(ex);
         }
     }
 }

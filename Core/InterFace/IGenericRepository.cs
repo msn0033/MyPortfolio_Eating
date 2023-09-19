@@ -9,9 +9,9 @@ namespace Core.InterFace
     public interface IGenericRepository<T> where T : class
     {
         IQueryable<T> GetAll();
-        Task<T> GetById(object id);
+        Task<T> GetByIdAsync(object id);
         Task Insert(T entity);
-        void Update(T entity);
+        Task Update(T entity,object id);
         Task Delete(object id);
     }
 }

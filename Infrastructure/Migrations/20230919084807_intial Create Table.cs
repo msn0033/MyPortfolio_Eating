@@ -15,7 +15,7 @@ namespace Infrastructure.Migrations
                 name: "Owners",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newid()"),
                     FName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     LName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     Avatar = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
@@ -30,7 +30,7 @@ namespace Infrastructure.Migrations
                 name: "PhoneNumbers",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     n1 = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     n2 = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: true),
                     n3 = table.Column<string>(type: "nvarchar(max)", nullable: true)
@@ -44,7 +44,7 @@ namespace Infrastructure.Migrations
                 name: "PortFolioItems",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     ProjectName = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     ImageUrl = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     Description = table.Column<string>(type: "NVARCHAR(100)", maxLength: 100, nullable: true),
@@ -65,7 +65,7 @@ namespace Infrastructure.Migrations
                 name: "Contacts",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "NEWID()"),
                     OwnerId = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
                     PhoneNumberId = table.Column<Guid>(type: "uniqueidentifier", nullable: false)
                 },
@@ -90,7 +90,7 @@ namespace Infrastructure.Migrations
                 name: "Addresss",
                 columns: table => new
                 {
-                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false),
+                    Id = table.Column<Guid>(type: "uniqueidentifier", nullable: false, defaultValueSql: "newid()"),
                     Street = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     City = table.Column<string>(type: "NVARCHAR(50)", maxLength: 50, nullable: false),
                     MainAddress = table.Column<bool>(type: "bit", nullable: false),

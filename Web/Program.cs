@@ -1,6 +1,8 @@
 
 
+using Core.InterFace;
 using Infrastructure.Data;
+using Infrastructure.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using System;
 
@@ -12,6 +14,8 @@ builder.Services.AddDbContext<Context>(options =>
 {
     options.UseSqlServer(builder.Configuration.GetConnectionString("constr"));
 });
+builder.Services.AddScoped(typeof(IUnitOfWork<>), typeof(UnitOfWork<>));
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
