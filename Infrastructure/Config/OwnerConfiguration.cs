@@ -46,8 +46,11 @@ namespace Infrastructure.Config
                    .HasForeignKey(x => x.OwnerId)
                    .IsRequired(true);
 
-         // builder.HasData(Seed.LoadOwner());
-        //  builder.HasData(Seed.LoadAddress());
+            //builder.HasData(Seed.LoadOwner());
+            //builder.HasData(Seed.LoadPhoneNumber());
+            //builder.HasData(Seed.LoadContact());
+            //builder.HasData(Seed.LoadAddress());
+
 
         }
     }

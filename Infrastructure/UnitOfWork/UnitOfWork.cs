@@ -11,7 +11,7 @@ namespace Infrastructure.UnitOfWork
 {
     public class UnitOfWork<T> : IUnitOfWork<T> where T : class
     {
-        private readonly Context _context;
+        public readonly Context _context;
         private readonly IGenericRepository<T>? _entity;
         public UnitOfWork(Context context)
         {
