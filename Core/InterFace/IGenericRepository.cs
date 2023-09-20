@@ -10,7 +10,7 @@ namespace Core.InterFace
     {
         IQueryable<T> GetAll();
         Task<T> GetByIdAsync(object id);
-        Task Insert(T entity);
+        Task InsertAsync(T entity);
         Task Update(T entity,object id);
         Task Delete(object id);
     }

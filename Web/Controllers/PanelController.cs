@@ -1,6 +1,6 @@
 ﻿using Core.Entites;
 using Core.InterFace;
-using Microsoft.AspNetCore.Http;
+
 using Microsoft.AspNetCore.Mvc;
 using Web.ViewModels;
 
@@ -9,22 +9,25 @@ namespace Web.Controllers
     public class PanelController : Controller
     {
         private readonly IUnitOfWork<PortFolioItem> _portfolioitem;
+        private readonly IWebHostEnvironment _hosting;
 
-        public PanelController(IUnitOfWork<PortFolioItem> portfolioitem)
+        public PanelController(IUnitOfWork<PortFolioItem> portfolioitem, IWebHostEnvironment hosting)
         {
             this._portfolioitem = portfolioitem;
+
+            this._hosting = hosting;
         }
         // GET: PanelController
         public ActionResult Index()
         {
-            var portfolioitem=_portfolioitem.Entity.GetAll().Select(x=>new PortFolioItemVM
+            var portfolioitem = _portfolioitem.Entity.GetAll().Select(x => new PortFolioItemVM
             {
                 ImageUrl = x.ImageUrl,
                 Description = x.Description,
                 ProjectName = x.ProjectName,
                 Id = x.Id,
                 OwnerId = x.OwnerId,
-                
+
             });
             return View(portfolioitem);
         }
@@ -38,22 +41,51 @@ namespace Web.Controllers
         // GET: PanelController/Create
         public ActionResult Create()
         {
-            return View();
+            var idopject=_portfolioitem.Entity.GetAll().Select(x=>new  PortFolioItemVM
+            {
+              OwnerId=x.OwnerId
+            }).FirstOrDefault();
+            return View(idopject);
         }
 
         // POST: PanelController/Create
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create(IFormCollection collection)
+        public async Task<ActionResult> Create(PortFolioItemVM portFolioItemVM)
         {
-            try
+            if (ModelState.IsValid)
             {
-                return RedirectToAction(nameof(Index));
+                try
+                {
+                    if (portFolioItemVM.Formfile != null)
+                    {
+                        string namefile = portFolioItemVM.Formfile.FileName;
+                        string root = _hosting.WebRootPath + @"\img\portfolio\";
+                        string pathFull = Path.Combine(root, namefile);
+                        await portFolioItemVM.Formfile.CopyToAsync(new FileStream(pathFull, FileMode.Create));
+
+                        var model = new PortFolioItem
+                        {
+                            ProjectName = portFolioItemVM.ProjectName,
+                            Description = portFolioItemVM.Description,
+                            ImageUrl = namefile,
+                            OwnerId = portFolioItemVM.OwnerId,
+                        };
+                        await _portfolioitem.Entity.InsertAsync(model);
+                        await _portfolioitem.SaveAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                  
+                }
+
+                catch
+                {
+                    return View(portFolioItemVM);
+                }
+
             }
-            catch
-            {
-                return View();
-            }
+
+            return View(portFolioItemVM);
         }
 
         // GET: PanelController/Edit/5

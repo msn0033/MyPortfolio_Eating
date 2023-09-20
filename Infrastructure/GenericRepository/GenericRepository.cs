@@ -32,7 +32,7 @@ namespace Infrastructure.GenericRepository
             return x!;
         }
 
-        public async Task Insert(T entity)
+        public async Task InsertAsync(T entity)
         {
             await _table.AddAsync(entity);
         }
